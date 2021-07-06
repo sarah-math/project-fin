@@ -1,6 +1,8 @@
 version: "2.0"
 
 nlu:
+
+
 - intent: greet
   examples: |
     - hey
@@ -9,17 +11,83 @@ nlu:
     - hello there
     - good morning
     - good evening
-    - moin
+    - start
+    - begin    
     - hey there
     - let's go
     - hey dude
     - goodmorning
     - goodevening
     - good afternoon
+    - hello are you still there
+    - hello, my name is [Sara](name)
+    - hi, i'm [Frida](name)
+    - [Jane](name)
+    - This is [Sara](name)
+    - [Carla](name) here!
+    - Hey, this is [Jane](name)
+    - [Sara](name) talking!
+    - [Frida](name)
+    - they call me [Sara](name)
+
 
 - intent: goodbye
   examples: |
-    - good afternoon
+    - see you later
+    - goodbye
+    - i'm done
+    - quit
+    - stop
+    - bye
+    - Adios
+    - BYEE
+    - GOODBYE
+    - Thanks a lot. See ya later
+
+
+- intent: affirm
+  examples: |
+    - indeed
+    - correct
+    - that sounds good
+    - yes
+    - yess please
+    - of course
+    - yup
+    - yeah
+    - yes please
+    - yes plz
+    - Sure
+    - Ok
+    - sweet
+    - cool,
+    - yes...
+    - okay
+    - alright
+
+- intent: deny
+  examples: |
+    - not really
+    - no
+    - I don't think so
+    - never
+    - no way
+    - nope
+    - no thanks
+    - I dunno
+    - Nothing!
+    - nevermind
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+
+- intent: goodbye
+  examples: |
     - cu
     - good by
     - cee you later
@@ -31,24 +99,6 @@ nlu:
     - bye bye
     - see you later
 
-- intent: affirm
-  examples: |
-    - yes
-    - y
-    - indeed
-    - of course
-    - that sounds good
-    - correct
-
-- intent: deny
-  examples: |
-    - no
-    - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
-    - not really
 
 - intent: mood_great
   examples: |
@@ -83,10 +133,3 @@ nlu:
     - extremly sad
     - so saad
     - so sad
-
-- intent: bot_challenge
-  examples: |
-    - are you a bot?
-    - are you a human?
-    - am I talking to a bot?
-    - am I talking to a human?

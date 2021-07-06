@@ -9,6 +9,14 @@ intents:
   - mood_unhappy
   - bot_challenge
 
+entities:
+  - name
+
+slots:
+  name:
+    type: text
+    auto_fill: true
+
 responses:
   utter_greet:
   - text: "Hey! How are you?"
@@ -28,6 +36,18 @@ responses:
 
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
+
+  utter_ask_name:
+  - text: HI, i'm RASA, What is your name?
+
+  utter_greet_by_name:
+  - text: hello {name}, how can i help you?
+
+forms:
+  name_form:
+    name:
+    - type: from_entity
+      entity: name
 
 session_config:
   session_expiration_time: 60
