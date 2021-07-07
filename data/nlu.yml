@@ -20,15 +20,13 @@ nlu:
     - goodevening
     - good afternoon
     - hello are you still there
-    - hello, my name is [Sara](name)
-    - hi, i'm [Frida](name)
-    - [Jane](name)
-    - This is [Sara](name)
-    - [Carla](name) here!
-    - Hey, this is [Jane](name)
-    - [Sara](name) talking!
-    - [Frida](name)
-    - they call me [Sara](name)
+    - hello, my name is Sara
+    - hi, i'm Frida
+    - This is Sara
+    - Carla here!
+    - Hey, this is Jane
+    - Sara talking!
+    - they call me Sara
 
 
 - intent: goodbye

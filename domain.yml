@@ -10,7 +10,7 @@ intents:
   - bot_challenge
 
 entities:
-  - name
+  - PERSON
 
 slots:
   name:
@@ -47,7 +47,7 @@ forms:
   name_form:
     name:
     - type: from_entity
-      entity: name
+      entity: PERSON
 
 session_config:
   session_expiration_time: 60

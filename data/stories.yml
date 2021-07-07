@@ -8,13 +8,28 @@ stories:
   steps:
   - intent: greet
     entities:
-    - name: Ali
+    - PERSON: Ali
   - action: utter_greet_by_name
   - intent: mood_unhappy
   - action: utter_cheer_up
   - action: utter_did_that_help
   - intent: deny
   - action: utter_goodbye
+
+
+
+- story: name interaction 2
+  steps:
+  - intent: greet
+    entities:
+    - PERSON: slah
+  - action: utter_greet_by_name
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
 
 
   
