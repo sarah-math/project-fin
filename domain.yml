@@ -13,7 +13,7 @@ entities:
   - PERSON
 
 slots:
-  name:
+  PERSON:
     type: text
     auto_fill: true
 
@@ -37,15 +37,15 @@ responses:
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
 
-  utter_ask_name:
+  utter_ask_PERSON:
   - text: HI, i'm RASA, What is your name?
 
   utter_greet_by_name:
-  - text: hello {name}, how can i help you?
+  - text: hello {PERSON}, how can i help you?
 
 forms:
-  name_form:
-    name:
+  PERSON_form:
+    PERSON:
     - type: from_entity
       entity: PERSON
 
