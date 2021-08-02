@@ -18,10 +18,21 @@ pipeline:
      analyzer: char_wb
      min_ngram: 1
      max_ngram: 4
+
+
+   - name: DucklingEntityExtractor
+     url: http://localhost:8000
+     dimensions:
+      - amount-of-money
+      - time
+      - number
+    
    - name: DIETClassifier
      epochs: 100
      constrain_similarities: true
   
+
+
    - name: EntitySynonymMapper
    - name: FallbackClassifier
      threshold: 0.3

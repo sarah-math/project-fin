@@ -1,53 +1,103 @@
 version: "2.0"
 
 intents:
-  - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
+- greet
+- goodbye
+- affirm
+- deny
+- mood_great
+- mood_unhappy
+- bot_challenge
+- nlu_fallback
+- out_of_scope
+- thankyou
+- help  
+- ask_transfer_charge
+- transfer_money
+  
 
 entities:
   - PERSON
+  - amount-of-money
+  - time
+  - number
 
 slots:
   PERSON:
     type: text
+    auto_fill: false
+
+  PERSON_transfer: 
+    type: text
     auto_fill: true
 
-responses:
-  utter_greet:
-  - text: "Hey! How are you?"
+  amount-of-money:
+    type: any
+    auto_fill: true
 
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+responses:
+  utter_ask_PERSON_form_PERSON:
+  - text: HI, i'm FINA, What is your name?
+
+  utter_greet_by_name:
+  - text: hello {PERSON}, how can i help you?
 
   utter_did_that_help:
   - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
 
   utter_goodbye:
   - text: "Bye"
 
   utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+  - text: "I am a bot, My name is FINA."
 
-  utter_ask_PERSON:
-  - text: HI, i'm RASA, What is your name?
+  utter_default:
+  - text: I didn't quite understand that. Could you rephrase?
 
-  utter_greet_by_name:
-  - text: hello {PERSON}, how can i help you?
+  utter_out_of_scope:
+  - text: Sorry, I'm not sure how to respond to that. Type "help" for assistance.
+
+  utter_noworries:
+  - text: You're welcome :)
+
+  utter_help:
+  - text: "I can help you with your financial accounts. \nYou can ask me things like:\
+      \ \n- What's my account balance? \n- Pay off my credit card \n- What did I spend\
+      \ at Target last month? \n- I need to transfer money"
+
+
+  utter_transfer_charge:
+  - text: You are entitled to six transfers within a statement cycle before being
+      charged. For subsequent transfers you will be charged {currency} 10 per transaction.
+
+  utter_ask_transfer_money_form_amount-of-money:
+  - text: How much money do you want to transfer?
+ 
+  utter_ask_transfer_money_form_PERSON_transfer:
+  - text: Who do you want to transfer money to?
+  
+  utter_transfer_complete:
+  - text: Successfully transferred {amount-of-money} to {PERSON_transfer}.
 
 forms:
+  transfer_money_form:
+    PERSON_transfer:
+      - type: from_entity
+        entity: PERSON
+  
+  
+    amount-of-money:
+      - type: from_entity
+        entity: amount-of-money
+
+
   PERSON_form:
     PERSON:
-    - type: from_entity
-      entity: PERSON
+      - type: from_entity
+        entity: PERSON
+        not intent: transfer_money
+
 
 session_config:
   session_expiration_time: 60

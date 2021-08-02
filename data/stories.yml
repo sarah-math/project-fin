@@ -2,31 +2,14 @@ version: "2.0"
 
 stories:
 
-
-- story: name interaction
+- story: transfer money happy path
   steps:
-  - intent: greet
+  - intent: transfer_money
+  - action: transfer_money_form
+  - active_loop: transfer_money_form
   - slot_was_set:
-    - PERSON: Ali
-  - action: utter_greet_by_name
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
-
-
-- story: name interaction with form
-  steps:
-  - intent: greet
-  - action: PERSON_form
-  - active_loop: name_form
+    - requested_slot: PERSON_transfer
   - slot_was_set:
-    - requested_slot: PERSON
+    - requested_slot: amount-of-money
   - active_loop: null
-  - action: utter_greet_by_name
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
+  - action: utter_transfer_complete

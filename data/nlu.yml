@@ -60,8 +60,28 @@ nlu:
     - sweet
     - cool,
     - yes...
+    - y
+    - ok
+    - ye
     - okay
+    - That would be great
+    - YES
+    - YUP
+    - Yea
+    - Yeah
+    - Yeah sure
+    - Yep
+    - Yep that's fine
+    - Yep!
+    - Yepp
+    - Yes
+    - Yes I do
+    - Yes please
+    - Yes please!
+    - Yes, I accept
     - alright
+    - alrighty
+
 
 - intent: deny
   examples: |
@@ -75,27 +95,100 @@ nlu:
     - I dunno
     - Nothing!
     - nevermind
+    - n
+    - i decline
+    - i don not like this
+    - i don't think so
+    - i don't want either of those
+    - i don't want to
+    - i don't want to give you my email
+    - i dont want to
+    - i dont want to accept :P lol
+    - i guess it means - no
+    - i'm afraid not
+    - i'm not sure
 
 - intent: bot_challenge
   examples: |
     - are you a bot?
-    - are you a human?
-    - am I talking to a bot?
-    - am I talking to a human?
+    - am i speaking to an ai?
+    - are you a human or a bot?
+    - are you real? 
+    - are you virtual? 
+    - are you an ai?
+    - aren't you a bot
+    - are you a chatbot
+    - are you a rasa bot?
+    - are you a real bot?
+    - are you a robot
+    - are you ai
+    - are you artificial
+    - are you artificial intelligence
+    - are you real
+    - are you really a bot
+    - are you robot
+    - are you sure that you're a bot?
+    - bot?
 
 
 - intent: goodbye
   examples: |
-    - cu
-    - good by
-    - cee you later
-    - good night
-    - bye
-    - goodbye
-    - have a nice day
-    - see you around
-    - bye bye
     - see you later
+    - goodbye
+    - i'm done
+    - quit
+    - stop
+    - bye
+    - Adios
+    - BYEE
+    - GOODBYE
+    - Thanks a lot. See ya later
+    - have a good day. time to go, bye
+    - and thats all thank you and good bye
+    - bye bye
+    - ok i gtg
+    - bye bye bot
+    - bye for now
+    - bye udo
+    - bye was nice talking to you
+    - bye!
+    - byee
+    - catch you later
+    - ciao
+    - cya
+    - farewell
+    - good bye
+    - good bye rasa bot!
+    - good night
+    - goodbye
+    - goodbye.
+    - goodnight
+    - gotta go
+
+- intent: thankyou
+  examples: |
+ 
+    - thank you
+    - okay thank you
+    - thanks
+    - Thanks!
+    - Awesome, you are a good bot!
+    - I see, thanks
+    - Oh thats good!
+    - it's good :-)
+    - thnaks
+    - good job bot
+    - great
+    - thanks for the help
+    - thanks you
+    - thanks!
+    - thankyou
+    - thnks
+    - thx
+    - thanks for your information
+    - thanks f
+
+
 
 
 - intent: mood_great
@@ -131,3 +224,139 @@ nlu:
     - extremly sad
     - so saad
     - so sad
+
+- intent: out_of_scope
+  examples: |
+    - what is the square root of 5
+    - I want to know the weather
+    - what is the meaning of life.
+    - Fridge Isn't Running
+    - my tv isn't working
+    - I want a pizza
+    - my washing machine isn't working
+    - what year is it
+    - order a pizza
+    - I want to order a pizza
+    - what is the weather today
+    - what is the weather
+    - what the weather today ?
+    - hows the weather
+    - tell me a joke
+    - Can I get a hamburger?
+    - Can YouTube talk?
+    - Can you call me back ?
+    - Can you give me your datacenter's password
+    - Can you give me your datacenter's password?
+    - Can you make sandwiches?
+    - Can you please send me an uber
+    - ofif fsdfafsfs
+    - gkfmkbfdmlbkl bkmkbmdf
+    - tbalbiiiiz 
+    - stuffff
+
+
+- intent: help
+  examples: |
+    - help
+    - what can you do?
+    - what can I ask you?
+    - what do you do?
+    - what can you help me with?
+    - help me
+    - help, what do you do
+    - how do I use this
+    - how can you help me
+    - What are the things that you can do?
+    - What else can you help me with?
+    - can you do anything else?
+    - can you help me?
+    - come back
+    - cool! can I do something else here?
+    - hello what can you do for me
+    - help
+    - help me
+    - help please
+    - help pls
+    - help?
+    - hep me
+
+
+- intent: ask_transfer_charge
+  examples: |
+    - Will I be charged for transferring money
+    - do transfers cost something?
+    - is there a transfer charge?
+    - Is there a charge
+    - will i be charged for a transaction?
+    - do xfers cost something?
+    - is there a transfer fee
+    - is there a xfer fee
+    - how much is the transfer fee
+    - whats the cost of transferring money
+    - what am I charged upon money transfer
+    - are you gonna bill me for this exchange
+    - whats the xfer price for this account
+    - okay but how much to move this money?
+    - how much is the fee to shift my money around
+    - if I send money to someone will I be charged extra for that?
+    - is there a charge when I send money to someone
+    - what is the fee for sending money to someone else
+    - I sent money to my friend will I be charged extra for that
+    - what is the percentage fee for transactions to another person
+    - are there any transaction fees or charges I should know about?
+    - tell me about transfer fees
+
+
+- intent: transfer_money
+  examples: |
+    - I want to pay [John](PERSON)
+    - I want to transfer $100 to [Bob](PERSON)
+    - can i transfer money to [Sally](PERSON)
+    - I want to transfer money
+    - I want to pay someone
+    - can I pay someone
+    - I need to transfer money to a friend
+    - can I transfer money to my [mom](PERSON)
+    - I want to pay [Bert](PERSON)
+    - pay my friend
+    - transfer money
+    - I want to transfer $100 to [Tommy](PERSON)
+    - i want to transfer $400 to [Akela](PERSON)
+    - I want to pay [Paula Handy](PERSON)
+    - pay Katy Parrow $40 please
+    - transfer $60 to [Jason Jacob](PERSON)
+    - pay [Evan Oslo](PERSON)
+    - pay [Lisa](PERSON) please
+    - can I transfer money to [Kyle Gardner](PERSON)?
+    - Pay [Karen](PERSON) 60 Euros
+    - pay [Mona](PERSON) $60
+    - transfer $60 to [Sally](PERSON)
+    - need to transfer money
+    - II want to transfer to [Kelly](PERSON)
+    - Pay [Percy](PERSON) $50
+    - Pay $50 to [Pat](PERSON)
+    - Ok pay [Emma](PERSON)
+    - pay [Emanual](PERSON)
+    - i want to transfer $100 to [Jane smith](PERSON)
+    - i want to transfer $100 to my [daughter](PERSON)
+    - i want to transfer money please
+    - i mean i want to transfer money
+    - I need to pay a friend.
+    - transfer money to [ethan oswald](PERSON)
+    - transfer money to [sara](PERSON)
+    - I need to transfer money to my grandma [Judith](PERSON).
+    - i want to transfer money to [Latisha](PERSON)
+    - I need to make an urgent transfer to [Bob](PERSON), can you do it?
+    - Ahh, okay so I want to make a transfer to [Bob](PERSON).
+    - Can I transfer money to a friend?
+    - I need to transfer money to [Jeff](PERSON), my son
+    - I need to send money to my kid
+    - I need to transfer money
+    - send $50 to [john jacob](PERSON)
+    - I need to transfer money to my co-worker who paid for lunch
+    - Hi I like to send money
+    - I'd like to send 50$ to [John](PERSON)
+    - Hi I like to send money to [John](PERSON)
+    - Please transfer 50 dollars to [Andreas](PERSON)
+    - I would like to transfer money to [Philipp](PERSON)
+    - I would like to transfer 50$ to [Joschka](PERSON)
