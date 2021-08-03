@@ -35,6 +35,10 @@ slots:
     type: any
     auto_fill: true
 
+  confirmation: 
+    type: any
+    auto_fill: false
+
 
 responses:
   utter_ask_PERSON_form_PERSON:
@@ -77,19 +81,40 @@ responses:
   utter_ask_transfer_money_form_PERSON_transfer:
   - text: Who do you want to transfer money to?
   
+  utter_ask_transfer_money_form_confirmation:
+    - buttons:
+      - payload: /affirm
+        title: Yes
+      - payload: /deny
+        title: No, cancel the transaction
+      text: Would you like to transfer {amount-of-money} to {PERSON_transfer}?
+
+  utter_transfer_cancelled:
+  - text: Transfer cancelled.
+
   utter_transfer_complete:
   - text: Successfully transferred {amount-of-money} to {PERSON_transfer}.
+
+actions:
+- action_transfer_money
 
 forms:
   transfer_money_form:
     PERSON_transfer:
       - type: from_entity
         entity: PERSON
-  
-  
+
     amount-of-money:
       - type: from_entity
         entity: amount-of-money
+
+    confirmation: 
+      - type: from_intent
+        intent: affirm
+        value: yes
+      - type: from_intent
+        intent: deny
+        value: no
 
 
   PERSON_form:

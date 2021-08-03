@@ -11,5 +11,8 @@ stories:
     - requested_slot: PERSON_transfer
   - slot_was_set:
     - requested_slot: amount-of-money
+  - slot_was_set:
+    - requested_slot: confirmation
   - active_loop: null
-  - action: utter_transfer_complete
+  - action: action_transfer_money
+  
