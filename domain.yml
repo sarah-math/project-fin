@@ -14,6 +14,7 @@ intents:
 - help  
 - ask_transfer_charge
 - transfer_money
+- check_recipients
   
 
 entities:
@@ -21,6 +22,8 @@ entities:
   - amount-of-money
   - time
   - number
+  - account_type
+  - credit_card
 
 slots:
   PERSON:
@@ -38,6 +41,25 @@ slots:
   confirmation: 
     type: any
     auto_fill: false
+
+  AA_CONTINUE_FORM:
+    type: any
+
+  amount_transferred:
+    type: any
+    initial_value: 0
+
+  
+  credit_card:
+    type: any
+    influence_conversation: false
+  currency:
+    type: any
+    influence_conversation: false
+    initial_value: "$"
+  account_type:
+    type: any
+    influence_conversation: false
 
 
 responses:
@@ -81,6 +103,14 @@ responses:
   utter_ask_transfer_money_form_PERSON_transfer:
   - text: Who do you want to transfer money to?
   
+  utter_ask_transfer_money_form_AA_CONTINUE_FORM:
+    - buttons:
+      - payload: /affirm
+        title: Yes
+      - payload: /deny
+        title: No, cancel the transfer
+      text: Would you like to continue scheduling the money transfer?
+
   utter_ask_transfer_money_form_confirmation:
     - buttons:
       - payload: /affirm
@@ -95,11 +125,34 @@ responses:
   utter_transfer_complete:
   - text: Successfully transferred {amount-of-money} to {PERSON_transfer}.
 
+  utter_recipients:
+  - text: These are your known recpients to whom you can send money:{formatted_recipients}
+
+  utter_credit_card_balance:
+  - text: The current balance for your {credit_card} account is {currency}{credit_card_balance}.
+
+  utter_account_balance:
+  - text: Your bank account balance is {currency}{init_account_balance}.
+
+
 actions:
 - action_transfer_money
+- action_show_recipients
+- action_show_transfer_charge
+- action_show_balance
 
 forms:
-  transfer_money_form:
+  
+  transfer_money_form: 
+    AA_CONTINUE_FORM:
+    - type: from_intent
+      intent: affirm
+      value: yes
+    - type: from_intent
+      intent: deny
+      value: no
+    
+    
     PERSON_transfer:
       - type: from_entity
         entity: PERSON

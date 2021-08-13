@@ -36,9 +36,19 @@ rules:
 - rule: is there a transfer charge
   steps:
   - intent: ask_transfer_charge
-  - action: utter_transfer_charge
+  - action: action_show_transfer_charge
 
 
+- rule: Show list of known recipients
+  steps:
+  - intent: check_recipients
+  - action: action_show_recipients
+
+
+- rule: Show balance (bank account or credit card, based on account_type)
+  steps:
+  - intent: check_balance
+  - action: action_show_balance
 
 - rule: name interaction
   steps:

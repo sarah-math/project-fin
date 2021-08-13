@@ -360,3 +360,86 @@ nlu:
     - Please transfer 50 dollars to [Andreas](PERSON)
     - I would like to transfer money to [Philipp](PERSON)
     - I would like to transfer 50$ to [Joschka](PERSON)
+
+
+- intent: check_recipients
+  examples: |
+    - Who can I send money to?
+    - Who are my known recipients
+    - Show me my list of recipients
+    - Show the recipient list
+    - Show me people I can send money to
+    - Who is a valid payee
+    - who can I pay?
+    - who can I transfer money?
+    - who's in my recipient list?
+    - who can I transfer money to?
+    - Who is on your list?
+    - who is in my list of kown recipients?
+    - Who all can I transfer money to?
+    - Who can I transfer money to?
+    - Okay. Who can I transfer money to then?
+    - can I see the list of known recipients?
+    - tell me who I can share my money with
+    - whats my recipient list
+    - can I send money to anyone?
+    - who exactly am I able to send money to
+    - if I want to transfer money can i send it to anyone
+    - show me my money sending list
+
+- intent: check_balance
+  examples: |
+    - How much money is on my account?
+    - How much money is on my [bank](account_type) account?
+    - what's my [balance](amount-of-money)?
+    - what's my [current balance](amount-of-money)?
+    - What's left on that account?
+    - How much do I have on that account?
+    - What's the [balance](amount-of-money) on that account?
+    - How much money is left on that account?
+    - what is my account [balance](amount-of-money)
+    - what's my account [balance](amount-of-money)?
+    - what's my account [balance](amount-of-money)
+    - whats my account [balance](amount-of-money)
+    - what is my [bank](account_type) account [balance](amount-of-money)
+    - what's my [bank](account_type) account [balance](amount-of-money)?
+    - what's my [bank](account_type) account [balance](amount-of-money)
+    - whats my [bank](account_type) account [balance](amount-of-money)
+    - What's my [credit card](account_type) [balance](amount-of-money)
+    - What's my [credit](account_type) [balance](amount-of-money)
+    - How much money do I owe on my [credit cards](account_type)
+    - Show me my [credit card](account_type) [balance](amount-of-money)
+    - What [credit](account_type) accounts do I have
+    - Show me my [credit](account_type) accounts
+    - Whats the [balance](amount-of-money) on my [credit](account_type) account
+    - What's my [credit](account_type) account
+    - What's my [emblem](credit_card) [card](account_type) [balance](amount-of-money)
+    - Show me my [iron bank](credit_card) [balance](amount-of-money)
+    - What's my [justice bank](credit_card) [balance](amount-of-money)
+    - What's the [balance](amount-of-money) on the [justice bank](credit_card) account
+    - what's my [emblm](credit_card) [credit card](account_type) [balance](amount-of-money)?
+    - what's my [credit card](account_type) [balance](amount-of-money)?
+    - what's my [credit card](account_type) account [balance](amount-of-money)?
+    - What is my [emblem](credit_card) [card](account_type) [balance](amount-of-money)?
+    - whats my [credit card](account_type) [balance](amount-of-money)
+    - What is my [emblem](credit_card) [balance](amount-of-money)?
+    - whats my [emblm](credit_card) [card](account_type) [balance](amount-of-money)?
+    - what's my [embelm](credit_card)'s [card](account_type) [balance](amount-of-money)?
+    - what's my [emblm](credit_card) account [balance](amount-of-money)?
+    - How much money have i spent lately>
+    - I should check my [credit card]{"entity": "account_type", "value": "credit"} [balance](amount-of-money) [first](account_type)
+    - check my [credit card]{"entity": "account_type", "value": "credit"} [balance](amount-of-money)
+    - check my [credit card]{"entity": "account_type", "value": "credit"} [balance](amount-of-money) [first](account_type)
+    - Can you tell me my account [balance](amount-of-money)?
+    - Hello, I would like to know how much money is in much money is in my account
+    - hi, whats my account bal please
+    - so.... what's my [balance](amount-of-money)?
+    - whats my [current balance](amount-of-money)
+    - What's my [balance](amount-of-money)?
+    - How much money do I have?
+    - Yeah, I like coffee 👀 But how much money do I have?
+    - Yeah, I know 😀 Since it's so nice: How much money do I have?
+    - what places have I spent money?
+    - Wait, I'll have to check my balance first. Can you do that please?
+    - Hi, I need to know how much money is in my [checking](account_type) account
+    - Balance please
