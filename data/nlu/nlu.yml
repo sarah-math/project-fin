@@ -188,6 +188,65 @@ nlu:
     - thanks for your information
     - thanks f
 
+- intent: search_transactions
+  examples: |
+    - how much did I spend at [Carrfours](vendor_name) this week?
+    - what is my typical spending at [magasin](vendor_name)?
+    - I want to check my spending history
+    - how much did I spend at [Monoprix](vendor_name) last week?
+    - I need to check my spending history
+    - I want to check my spending
+    - I want to check my spending history at [Monoprix](vendor_name)
+    - i want to check my spending history
+    - i want to see my transaction history
+    - I want to search my past transactions
+    - can I search my transaction history
+    - can I look at past transactions
+    - I want to search my transactions with [MG](vendor_name)
+    - can i seem my transactions with [Magasin Général](vendor_name)
+    - how much did i spend at [monoprix](vendor_name) last month?
+    - what did i spend last month?
+    - How much did I spend last month?
+    - What did I spend at [geant](vendor_name) last month?
+    - What did I spend at [Géant](vendor_name) last year?
+    - how much did i spend at [Geant](vendor_name) last year
+    - Yes! How much did I spend on [monoprix](vendor_name) last month?
+    - How much did I spend at Burger King last month?
+    - what places have I spent money?
+    - What did I spend at [Monoprix](vendor_name) in may?
+    - How much money did I lose to [monopri](vendor_name) in may?
+    - Oh how much did I actually spend at [carrfour](vendor_name) last month? I'd love to know.
+    - Can you tell me how much I spent at [MG](vendor_name) this month?
+    - Can you tell me how much I spent at coffeeshops this month?
+    - Can you tell me how much I spent on coffee this month?
+    - What did I spend at [magasin général](vendor_name) last month?
+    - what did I spend at [Carrfours](vendor_name) last month
+    - where did I spend the most money last month?
+
+- intent: check_earnings
+  examples: |
+    - How much money went into my account last month?
+    - How much money did I make last year?
+    - What did I earn last month?
+    - How much did I make last month?
+    - How much money did I make last week?
+    - how much was deposited in my account last month?
+    - how much was deposited in my account in the last two weeks?
+    - check deposits for last week
+    - total deposits over last year
+    - how much was deposited in January
+    - how much money have I earned?
+    - what did I earn?
+    - How much have i earned?
+    - how much did I make
+    - am I rich yet?
+    - am I a millionaire
+    - how much cash is rolling through my account
+    - how much money is in the money making machine account?
+    - what did I make in the last year?
+    - show me how much I've earned in the last week
+    - can i afford to go on vacation
+    - rent is due soon how much do I have in my account
 
 
 
@@ -443,3 +502,221 @@ nlu:
     - Wait, I'll have to check my balance first. Can you do that please?
     - Hi, I need to know how much money is in my [checking](account_type) account
     - Balance please
+
+- intent: pay_cc
+  examples: |
+    - I would like to pay the [minimum balance](amount-of-money) on my [embelm](credit_card) [card](account_type)
+    - I want to pay my [credit card](account_type)
+    - I want to pay my [card](account_type)
+    - Pay my [card](account_type)
+    - I want to pay my [justice bank](credit_card) bill
+    - Pay my [discover](credit_card)
+    - I want to pay my [iron bank](credit_card) bill
+    - Pay my [visa](credit_card)
+    - I want to pay my [visa](credit_card) bill
+    - Pay my [mastercard](credit_card)
+    - I want to pay my [MasterCard](credit_card) bill
+    - I want to pay my [credit card](account_type) bill
+    - I want to pay the [current balance](amount-of-money) on my [credit card](account_type)
+    - can you help me pay the [current balance](amount-of-money) on my [credit card](account_type)
+    - i want to pay off my [credit card](account_type)
+    - I want to pay off my [credit card](account_type)
+    - i want to pay my [credit card](account_type)
+    - i want to pay off my [emblem](credit_card) [credit card](account_type)
+    - I want to pay my [current balance](amount-of-money) on my [embelm](credit_card) [credit card](account_type)
+    - i want to pay my [current balance](amount-of-money) on my [emblem](credit_card) [credit card](account_type)
+    - I want to pay $500 on my [emblem](credit_card) [credit card](account_type) on Sunday
+    - I want to pay my [current balance](amount-of-money) on my [emblem](credit_card) [credit card](account_type) today
+    - i need to pay off my [emblm](credit_card) [credit card](account_type)
+    - Please schedule  a payment towards my [credit card](account_type) for April 12th
+    - Can I schedule a payment towards my [credit card](account_type) for tomorrow?
+    - Pay off my [minimum balance](amount-of-money) please
+    - i would like to pay $1200 to my [credit card]{"entity": "account_type", "value": "credit"}
+    - I would also like to pay my [visa](credit_card) bill
+    - Pay off my [credit card]{"entity": "account_type", "value": "credit"}, please
+    - I guess it is. Since it's so much, let's pay off my [credit](account_type)
+    - Let's pay that [credit card]{"entity": "account_type", "value": "credit"} bill
+    - I want to pay 100 dollars toward my [Emblem](credit_card) [card](account_type), tomorrow
+    - pay 100 towards [emblem](credit_card) [card](account_type), tomorrow
+    - id like to pay my bill
+    - could I pay off my [credit card]{"entity": "account_type", "value": "credit"}?
+    - pay off my [credit card]{"entity": "account_type", "value": "credit"}
+    - i wanna pay my [credit card]{"entity": "account_type", "value": "credit"}
+    - pay a bill
+    - can I pay my [card]{"entity": "account_type", "value": "credit"}?
+
+- intent: add_person_to_recipients
+  examples: |
+    - Add new person to payee list
+    - Register a new entry on my recipients list
+    - Please can you add [Sarah](PERSON) to my recipients list
+    - Can [Naima](PERSON) become one of my known recipients?
+    - i want to send this person money without giving the RIB each time
+    - can i skip the step of adding the RIB each time?
+    - Add her to my recipients list
+    - Plz add that person to my recipients list
+    - can you memorize the RIB of this person?
+    - Please remember the RIB of this person from now on, it's [789456123](RIB)
+    - Don't ask me for the rib  next time
+    - Send to him directly without asking me about the account number
+    - put [SAMY](PERSON) on the list of recipients
+    - remember [SAMY](PERSON) next time
+    - Dont ask me about the account number of [SAMI](PERSON) next time
+    - Add him to my list of recipients
+    - Put [SAMI](PERSON) on the list of valid payees
+    - Pay her without asking the rib okay?
+    - Can i not give the details about her account every time?
+    - I want to transfer her without giving the details each time, is it possible?
+    - Add [Naima](PERSON) with the rib [963852741](RIB) to my list of payees
+    - The RIB of [Naima](PERSON) is  [951847623](RIB) add her to my list please
+    - [Naima](PERSON) s RIB is [965874123](RIB) memorize it
+    - Remember the RIB of [Rania](PERSON) which is [123456789](RIB)
+    - Please remember the account details of this person
+    - Remeber the account details of [Rania](PERSON)
+    - Memorise the details of this account 
+    - Save the RIB of this person
+    - Don't ask me about the account details next time
+    - Can you save the account details of [Naima](PERSON)
+    - Add a new recipient
+    - Add a new recipient with the name [SAMY](PERSON) and RIB [142536789](RIB)
+    - New recipient on my list
+
+
+
+- intent: inform
+  examples: |
+    - $10
+    - 5000
+    - 500
+    - $100
+    - $500
+    - 100 dollars
+    - 1000 dollars
+    - [111222333](RIB)
+    - [123456789](RIB)
+    - [147258369](RIB)
+    - [987654321](RIB)
+    - [741852963](RIB)
+    - [369258147](RIB)
+    - [123265458](RIB)
+    - [951847623](RIB)
+    - tomorrow
+    - next week
+    - yesterday
+    - for today
+    - last week
+    - the past month
+    - the past two days
+    - the last two weeks
+    - at [amazon](vendor_name)
+    - [starbucks](vendor_name)
+    - at [target](vendor_name)
+    - at [starbucks](vendor_name)
+    - [target](vendor_name)
+    - [Amazon](vendor_name)
+    - [Starbucks](vendor_name)
+    - [Target](vendor_name)
+    - I want to pay the [current balance](amount-of-money)
+    - [current balance](amount-of-money)
+
+    - the [current balance](amount-of-money)
+
+    - my [current balance](amount-of-money)
+    - [Ettijeri](credit_card) [card](account_type)
+    - [Zaitouna](credit_card) [card](account_type
+    - all [cards](account_type)
+    - [BIAT](credit_card) [card](account_type)
+    - [BH](credit_card) [card](account_type)
+    - [BH](credit_card)
+    - [AMEN](credit_card)
+    - [BIAT](credit_card)
+    - [Ettijeri](credit_card) account
+    - [BIAT](credit_card) account
+    - [AMEN](credit_card) account
+    - [AMEN](credit_card) [credit card](account_type)
+    - [BIAT](credit_card) [credit card](account_type)
+    - [Zaitouna](credit_card) [credit card](account_type)
+    - my [AMEN](credit_card) [credit card](account_type)
+    - my [BH](credit_card) [credit card](account_type)
+    - my [zaitouna](credit_card) [credit card](account_type)
+    - my [BH](credit_card) [card](account_type)
+    - my [AMEN](credit_card) [card](account_type)
+    - my [Ettijeri bank](credit_card) [card](account_type)
+    - towards my [BH Bank](credit_card) [card](account_type)
+    - towards my [amen bank](credit_card) [card](account_type)
+    - towards my [biat bank](credit_card) [card](account_type)
+    - for sunday
+    - for friday
+    - for tomorrow
+    - for saturday
+    - today
+    - Please schedule it for the first of next month
+    - a hundred dollars
+    - [mastercard](credit_card)
+    - [visa](credit_card)
+    - [amen bank](credit_card)
+    - my [biat bank](credit_card) account
+    - my [credit card]{"entity": "account_type", "value": "credit"} account ending in 4321
+    - My [Visa](credit_card) account
+    - A friend.
+    - [Ameni](PERSON)?
+    - today please
+    - [zaitouna Bank](credit_card)
+    - My [visa](credit_card)
+    - [Laila](PERSON)
+    - [Kais](PERSON)
+    - [hela](PERSON)
+    - [naima](PERSON)
+    - [sarah](PERSON)
+    - [amine](PERSON)
+    - [slah](PERSON)
+    - [sami](PERSON)
+    - [samy](PERSON)
+    - [sarah mathlouthi](PERSON)
+    - to my [brother](PERSON)
+    - to my [sister](PERSON)
+    - my [dad](PERSON)
+    - William Baker
+    - Evan Oslo
+    - Lisa Macintyre
+    - Karen Lancaster
+    - Percy Donald
+    - Kyle Gardner
+    - Katy Parrow
+    - Percy please
+    - Laura Schilling
+    - In that case, let's go with Naima
+    - Jane
+    - Melinda
+    - Sara
+    - my wife's
+    - Andreas
+    - htthis weekend
+    - all of them
+    - Darren Smith
+    - Percy
+    - percy donald
+    - danIelle smilanich
+
+    
+   
+    
+- synonym: credit
+  examples: |
+    - credit card
+    - credit cards
+    - credit account
+    - credit accounts
+    - card
+    - cards
+    - credit card account
+- synonym: emblem
+  examples: |
+    - emblm
+    - embelm
+    - Emblem
+- synonym: current balance
+  examples: |
+    - balance
+    - full
+    - full balance

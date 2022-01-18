@@ -1,0 +1,133 @@
+version: "2.0"
+nlu:
+- intent: mood_great
+  examples: |
+    - amazing
+    - perfect
+    - I am feeling very good
+- intent: mood_unhappy
+  examples: |
+    - I am sad
+    - very sad
+    - I am disappointed
+- intent: bot_challenge
+  examples: |
+    - are you artificial
+    - are you real?
+    - are you a bot?
+    - are you a real bot?
+- intent: thankyou
+  examples: |
+    - thnaks
+    - thnks
+    - thanks!
+    - it's good :-)
+- intent: help
+  examples: |
+    - What else can you help me with?
+    - come back
+    - help pls
+    - how can you help me
+- intent: greet
+  examples: |
+    - hey
+    - goodmorning
+    - hello
+    - hi, i'm Frida
+- intent: deny
+  examples: |
+    - i don't want either of those
+    - i don not like this
+    - i don't want to give you my email
+    - nope
+- intent: ask_transfer_charge
+  examples: |
+    - how much is the fee to shift my money around
+    - what is the fee for sending money to someone else
+    - tell me about transfer fees
+    - do transfers cost something?
+    - whats the cost of transferring money
+- intent: check_recipients
+  examples: |
+    - who can I transfer money?
+    - can I send money to anyone?
+    - who can I pay?
+    - who's in my recipient list?
+- intent: out_of_scope
+  examples: |
+    - Can you call me back ?
+    - what is the meaning of life.
+    - I want to know the weather
+    - gkfmkbfdmlbkl bkmkbmdf
+    - Can you make sandwiches?
+- intent: goodbye
+  examples: |
+    - have a good day. time to go, bye
+    - gotta go
+    - byee
+    - goodbye.
+    - GOODBYE
+    - goodnight
+- intent: affirm
+  examples: |
+    - Yes
+    - Yep
+    - YUP
+    - Yepp
+    - That would be great
+    - sweet
+    - alrighty
+    - YES
+- intent: pay_cc
+  examples: |
+    - i want to pay off my [credit card](account_type)
+    - I want to pay the [current balance](amount-of-money) on my [credit card](account_type)
+    - i want to pay my [credit card](account_type)
+    - Pay off my [credit card]{"entity": "account_type", "value": "credit"}, please
+    - Pay my [mastercard](credit_card)
+    - Pay off my [minimum balance](amount-of-money) please
+    - Pay my [card](account_type)
+- intent: transfer_money
+  examples: |
+    - Hi I like to send money
+    - I need to transfer money to my grandma [Judith](PERSON).
+    - need to transfer money
+    - i want to transfer money please
+    - I want to transfer $100 to [Bob](PERSON)
+    - I want to transfer $100 to [Tommy](PERSON)
+    - II want to transfer to [Kelly](PERSON)
+    - pay [Emanual](PERSON)
+    - I need to transfer money to [Jeff](PERSON), my son
+    - transfer $60 to [Sally](PERSON)
+    - I would like to transfer 50$ to [Joschka](PERSON)
+- intent: check_balance
+  examples: |
+    - what's my [credit card](account_type) [balance](amount-of-money)?
+    - so.... what's my [balance](amount-of-money)?
+    - whats my [bank](account_type) account [balance](amount-of-money)
+    - whats my [credit card](account_type) [balance](amount-of-money)
+    - What [credit](account_type) accounts do I have
+    - What's the [balance](amount-of-money) on that account?
+    - What's my [emblem](credit_card) [card](account_type) [balance](amount-of-money)
+    - What's left on that account?
+    - what's my [emblm](credit_card) [credit card](account_type) [balance](amount-of-money)?
+    - hi, whats my account bal please
+- synonym: credit
+  examples: |
+    - credit card
+    - card
+    - credit cards
+    - credit account
+    - credit accounts
+    - cards
+    - credit card account
+- synonym: emblem
+  examples: |
+    - emblm
+    - embelm
+    - Emblem
+- synonym: current balance
+  examples: |
+    - balance
+    - full
+    - full balance

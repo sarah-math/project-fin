@@ -6,6 +6,7 @@
 
 
 # This is a simple example for a custom action which utters "Hello World!"
+from dateutil import parser
 
 from typing import Any, Text, Dict, List
 
@@ -22,6 +23,12 @@ from rasa_sdk.events import (
     UserUtteranceReverted,
 )
 
+from actions.parsing import (
+    parse_duckling_time_as_interval,
+    parse_duckling_time,
+    get_entity_details,
+    parse_duckling_currency,
+)
 
 #
 #class ActionHelloWorld(Action):
@@ -36,6 +43,226 @@ from rasa_sdk.events import (
 #         dispatcher.utter_message(text="Hello World!")
 #
 #         return []
+#action_transaction_search
+
+class ActionTransactionSearch(Action):
+    """Searches for a transaction"""
+
+    def name(self) -> Text:
+        """Unique identifier of the action"""
+        return "action_transaction_search"
+
+    async def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        """Executes the action"""
+        slots = {
+            "AA_CONTINUE_FORM": None,
+            "confirmation": None,
+            "time": None,
+            "time_formatted": None,
+            #"start_time": None,
+            #"end_time": None,
+            # "start_time_formatted": None,
+            # "end_time_formatted": None,
+            # "grain": None,
+            "search_type": None,
+            "vendor_name": None,
+        }
+
+        if tracker.get_slot("confirmation") == "yes":
+            search_type = tracker.get_slot("search_type")
+            deposit = search_type == "deposit"
+            vendor = tracker.get_slot("vendor_name")
+            vendor_name = f" at {vendor.title()}" if vendor else ""
+            #start_time = parser.isoparse(tracker.get_slot("start_time"))
+            #end_time = parser.isoparse(tracker.get_slot("end_time"))
+
+            numtransacts=5
+            total=120
+            
+            #transactions = profile_db.search_transactions(
+            #    tracker.sender_id,
+            #     start_time=start_time,
+            #     end_time=end_time,
+            #     deposit=deposit,
+            #     vendor=vendor,
+            # )
+
+        #     aliased_transactions = transactions.subquery()
+        #     total = profile_db.session.query(
+        #         sa.func.sum(aliased_transactions.c.amount)
+        #     )[0][0]
+        #     if not total:
+        #         total = 0
+        #     numtransacts = transactions.count()
+            slotvars = {
+                "total": f"{total:.2f}",
+                "numtransacts": numtransacts,
+                #"start_time_formatted": tracker.get_slot("start_time_formatted"),
+                #"end_time_formatted": tracker.get_slot("end_time_formatted"),
+                "vendor_name": vendor_name,
+            }
+            dispatcher.utter_message(
+                    response=f"utter_found_{search_type}_transactions",
+                    **slotvars, )
+
+            # dispatcher.utter_message(
+            #     response=f"utter_searching_{search_type}_transactions",
+            #     **slotvars,
+            # )
+        #     dispatcher.utter_message(
+        #         response=f"utter_found_{search_type}_transactions", **slotvars
+        #     )
+        # else:
+        #     dispatcher.utter_message(response="utter_transaction_search_cancelled")
+       
+             
+        return [SlotSet(slot, value) for slot, value in slots.items()]
+
+
+
+class ActionAskTransactionSearchFormConfirm(Action):
+    """Asks for the 'zz_confirm_form' slot of 'transaction_search_form'
+
+    A custom action is used instead of an 'utter_ask' response because a different
+    question is asked based on 'search_type' and 'vendor_name' slots.
+    """
+
+    def name(self) -> Text:
+        return "action_ask_transaction_search_form_confirmation"
+
+    async def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
+    ) -> List[EventType]:
+        """Executes the custom action"""
+        search_type = tracker.get_slot("search_type")
+        vendor_name = tracker.get_slot("vendor_name")
+        start_time_formatted = tracker.get_slot("start_time_formatted")
+        end_time_formatted = tracker.get_slot("end_time_formatted")
+
+        if vendor_name:
+            vendor_name = f" with {vendor_name}"
+        else:
+            vendor_name = ""
+        if search_type == "spend":
+            text = (
+                f"Do you want to search for transactions{vendor_name} between "
+                f"{start_time_formatted} and {end_time_formatted}?"
+            )
+        elif search_type == "deposit":
+            text = (
+                f"Do you want to search deposits made to your account between "
+                f"{start_time_formatted} and {end_time_formatted}?"
+            )
+        buttons = [
+            {"payload": "/affirm", "title": "Yes"},
+            {"payload": "/deny", "title": "No"},
+        ]
+
+        dispatcher.utter_message(text=text, buttons=buttons)
+
+        return []
+
+
+
+
+class ActionPayCC(Action):
+    """Pay credit card."""
+
+    def name(self) -> Text:
+        """Unique identifier of the action"""
+        return "action_pay_cc"
+
+    async def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        """Executes the action"""
+
+        slots = {
+            "AA_CONTINUE_FORM": None,
+            "confirmation": None,
+            "credit_card": None,
+            "account_type": None,
+            "amount-of-money": None,
+            "time": None,
+            #"time_formatted": None,
+            # "start_time": None,
+            # "end_time": None,
+            # "start_time_formatted": None,
+            # "end_time_formatted": None,
+            # "grain": None,
+            #"number": None,
+        }
+
+        if tracker.get_slot("confirmation") == "yes":
+            credit_card = tracker.get_slot("credit_card")
+            amount_of_money = float(tracker.get_slot("amount-of-money"))
+            #amount_transferred = float(tracker.get_slot("amount_transferred"))
+            """profile_db.pay_off_credit_card(
+                tracker.sender_id, credit_card, amount_of_money
+            )"""
+
+            dispatcher.utter_message(response="utter_cc_pay_scheduled")
+
+            #slots["amount_transferred"] = amount_transferred + amount_of_money
+        else:
+            dispatcher.utter_message(response="utter_cc_pay_cancelled")
+
+        return [SlotSet(slot, value) for slot, value in slots.items()]
+
+class ActionAddRecipient(Action):
+     
+     def name(self) -> Text:
+        """Unique identifier of the action"""
+        return "action_add_person_to_recipients"
+
+     async def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
+    ) -> List[EventType]:
+        """Executes the action"""
+        slots = {
+          
+           "confirmation": None,
+           "PERSON_Recipient": None,
+           "RIB": None,
+           "number": None,
+   }
+
+        if tracker.get_slot("confirmation") == "yes":
+#            amount_of_money = float(tracker.get_slot("amount-of-money"))
+#            from_account_number = profile_db.get_account_number(
+#                profile_db.get_account_from_session_id(tracker.sender_id)
+#            )
+#            to_account_number = profile_db.get_account_number(
+#                profile_db.get_recipient_from_name(
+#                    tracker.sender_id, tracker.get_slot("PERSON")
+#                )
+#            )
+#            profile_db.transact(
+#                from_account_number,
+#                to_account_number,
+#                amount_of_money,
+#            )
+
+            dispatcher.utter_message(response="utter_recipients_complete")
+
+#            amount_transferred = float(tracker.get_slot("amount_transferred"))
+           
+#            slots["amount_transferred"] = amount_transferred + amount_of_money
+            #slots["amount_transferred"] = 150
+        else:
+            dispatcher.utter_message(response="utter_recipients_cancelled")
+                                               
+        
+        #return []
+        return [SlotSet(slot, value) for slot, value in slots.items()]
 
 class ActionTransferMoney(Action):
      
@@ -48,11 +275,11 @@ class ActionTransferMoney(Action):
     ) -> List[EventType]:
         """Executes the action"""
         slots = {
-           "AA_CONTINUE_FORM": None,
+          # "AA_CONTINUE_FORM": None,
            "confirmation": None,
            "PERSON_transfer": None,
            "amount-of-money": None,
-           # "number": None,
+            "number": None,
    }
 
         if tracker.get_slot("confirmation") == "yes":
@@ -76,7 +303,7 @@ class ActionTransferMoney(Action):
 #            amount_transferred = float(tracker.get_slot("amount_transferred"))
            
 #            slots["amount_transferred"] = amount_transferred + amount_of_money
-            slots["amount_transferred"] = 150
+            #slots["amount_transferred"] = 150
         else:
             dispatcher.utter_message(response="utter_transfer_cancelled")
         
@@ -136,6 +363,11 @@ class ActionShowRecipients(Action):
         return events
 
 
+
+
+
+
+
 class ActionShowBalance(Action):
     """Shows the balance of bank or credit card accounts"""
 
@@ -165,8 +397,8 @@ class ActionShowBalance(Action):
                     "credit_card": credit_card.title(),
                     "credit_card_balance": f"{current_balance:.2f}",
                 }, )
-            events = []
-         #   events.append(SlotSet("account_type", value=None))
+            
+            #SlotSet("account_type", value=None)
 
                 
             """else:

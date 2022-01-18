@@ -50,6 +50,109 @@ rules:
   - intent: check_balance
   - action: action_show_balance
 
+
+- rule: Ask the user to rephrase whenever they send a message with low NLU confidence
+  steps:
+  - intent: nlu_fallback
+  - action: utter_default
+
+ 
+- rule: answer out of scope
+  steps:
+  - intent: out_of_scope
+  - action: utter_out_of_scope
+
+
+- rule: Activate transfer_money_form when no other form is active
+  condition:
+  # this condition allows stories to handle form switching
+  - active_loop: null
+  steps:
+  - intent: transfer_money
+  - action: transfer_money_form
+  - active_loop: transfer_money_form
+
+- rule: Activate add_person_to_recipients when no other form is active
+  condition:
+  # this condition allows stories to handle form switching
+  - active_loop: null
+  steps:
+  - intent: add_person_to_recipients
+  - action: add_person_to_recipients_form
+  - active_loop: add_person_to_recipients_form
+
+- rule: Activate cc_payment_form when no other form is active
+  condition:
+  # this condition allows stories to handle form switching
+  - active_loop: null
+  steps:
+  - intent: pay_cc
+  - action: cc_payment_form
+  - active_loop: cc_payment_form
+
+
+- rule: Activate transaction_search_form when no other form is active
+  condition:
+  # this condition allows stories to handle form switching
+  - active_loop: null
+  steps:
+  - or:
+    - intent: search_transactions
+    - intent: check_earnings
+  - action: transaction_search_form
+  - active_loop: transaction_search_form
+
+- rule: Submit  add_person_to_recipients while not switched from previous form
+  condition:
+  - active_loop:  add_person_to_recipients_form
+  - slot_was_set:
+    - previous_form_name: null
+  steps:
+  - action:  add_person_to_recipients_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_add_person_to_recipients
+
+   
+- rule: Submit transfer_money form while not switched from previous form
+  condition:
+  - active_loop:  transfer_money_form
+  - slot_was_set:
+    - previous_form_name: null
+  steps:
+  - action:  transfer_money_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_transfer_money
+
+  
+- rule: Submit cc_payment_form while not switched from previous form
+  condition:
+  - active_loop: cc_payment_form
+  - slot_was_set:
+    - previous_form_name: null
+  steps:
+  - action: cc_payment_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_pay_cc
+
+  
+- rule: Submit transaction_search_form while not switched from previous form
+  condition:
+  - active_loop: transaction_search_form
+  - slot_was_set:
+    - previous_form_name: null
+  steps:
+  - action: transaction_search_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_transaction_search
+
 - rule: name interaction
   steps:
   - intent: greet

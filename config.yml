@@ -30,6 +30,13 @@ pipeline:
    - name: DIETClassifier
      epochs: 100
      constrain_similarities: true
+    # hidden_layers_sizes: 
+     embedding_dimension: 20 
+     number_of_transformer_layers: 2
+     transformer_size: 256
+     weight_sparsity: 0.8
+     random_seed: 0
+
   
 
 
