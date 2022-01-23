@@ -20,7 +20,7 @@ intents:
 - add_person_to_recipients
 - check_earnings
 - search_transactions
-  
+- inform
 
 entities:
   - PERSON
@@ -53,7 +53,7 @@ slots:
 
   amount-of-money:
     type: any
-    auto_fill: true
+    auto_fill: false
 
   confirmation: 
     type: any
@@ -110,7 +110,21 @@ slots:
     type: any
     influence_conversation: false
 
+  number:
+    type: any
+    influence_conversation: false
 
+  repeated_validation_failures:
+    type: any
+
+  payment_amount_type:
+    type: any
+    initial_value: ''
+  
+  next_form_name:
+    type: text
+    influence_conversation: true
+  
 responses:
   
 
@@ -267,6 +281,37 @@ responses:
   utter_found_deposit_transactions:
   - text: I found {numtransacts} deposits made to your account totalling {currency}{total}
 
+  utter_changed_account_balance:
+  - text: Your bank account balance was {currency}{init_account_balance} and is now
+      {currency}{account_balance} after transfers and payments.
+
+  utter_insufficient_funds:
+  - text: Sorry, you don't have enough money to do that!
+
+  utter_no_payment_amount:
+  - text: Sorry, I don't understand that payment amount.
+
+  utter_unknown_recipient:
+  - text: Sorry, {PERSON_transfer} is not in your list of known recipients.
+
+ 
+  utter_no_vendor_name:
+  - text: Sorry, that's not a recognized vendor.
+
+  utter_no_transactdate:
+  - text: Sorry, that's not a recognized time frame.
+
+
+  
+  utter_nothing_due:
+  - text: Your don't owe any money on your {credit_card} credit card bill.
+
+  utter_no_creditcard:
+  - text: Sorry, that is not a valid credit card account to make payments towards.
+
+  utter_insufficient_funds_specific:
+  - text: The {payment_amount_type} on your {credit_card} credit card is {amount-of-money}, so you have insufficient funds to pay it off.
+
 actions:
 - action_transfer_money
 - action_show_recipients
@@ -276,6 +321,13 @@ actions:
 - action_add_person_to_recipients
 - action_ask_transaction_search_form_confirmation
 - action_transaction_search
+- validate_transfer_money_form
+- validate_cc_payment_form
+- validate_transaction_search_form
+- action_switch_forms_ask
+- action_switch_forms_deny
+- action_switch_forms_affirm
+- action_switch_back_ask
 
 forms:
   
