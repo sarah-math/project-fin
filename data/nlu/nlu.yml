@@ -1,8 +1,5 @@
 version: "2.0"
-
 nlu:
-
-
 - intent: greet
   examples: |
     - hey
@@ -12,7 +9,7 @@ nlu:
     - good morning
     - good evening
     - start
-    - begin    
+    - begin
     - hey there
     - let's go
     - hey dude
@@ -27,8 +24,6 @@ nlu:
     - Hey, this is Jane
     - Sara talking!
     - they call me Sara
-
-
 - intent: goodbye
   examples: |
     - see you later
@@ -41,8 +36,26 @@ nlu:
     - BYEE
     - GOODBYE
     - Thanks a lot. See ya later
-
-
+    - have a good day. time to go, bye
+    - and thats all thank you and good bye
+    - bye bye
+    - ok i gtg
+    - bye bye bot
+    - bye for now
+    - bye udo
+    - bye was nice talking to you
+    - bye!
+    - byee
+    - catch you later
+    - ciao
+    - cya
+    - farewell
+    - good bye
+    - good bye rasa bot!
+    - good night
+    - goodbye.
+    - goodnight
+    - gotta go
 - intent: affirm
   examples: |
     - indeed
@@ -81,8 +94,6 @@ nlu:
     - Yes, I accept
     - alright
     - alrighty
-
-
 - intent: deny
   examples: |
     - not really
@@ -107,14 +118,13 @@ nlu:
     - i guess it means - no
     - i'm afraid not
     - i'm not sure
-
 - intent: bot_challenge
   examples: |
     - are you a bot?
     - am i speaking to an ai?
     - are you a human or a bot?
-    - are you real? 
-    - are you virtual? 
+    - are you real?
+    - are you virtual?
     - are you an ai?
     - aren't you a bot
     - are you a chatbot
@@ -129,45 +139,8 @@ nlu:
     - are you robot
     - are you sure that you're a bot?
     - bot?
-
-
-- intent: goodbye
-  examples: |
-    - see you later
-    - goodbye
-    - i'm done
-    - quit
-    - stop
-    - bye
-    - Adios
-    - BYEE
-    - GOODBYE
-    - Thanks a lot. See ya later
-    - have a good day. time to go, bye
-    - and thats all thank you and good bye
-    - bye bye
-    - ok i gtg
-    - bye bye bot
-    - bye for now
-    - bye udo
-    - bye was nice talking to you
-    - bye!
-    - byee
-    - catch you later
-    - ciao
-    - cya
-    - farewell
-    - good bye
-    - good bye rasa bot!
-    - good night
-    - goodbye
-    - goodbye.
-    - goodnight
-    - gotta go
-
 - intent: thankyou
   examples: |
- 
     - thank you
     - okay thank you
     - thanks
@@ -187,7 +160,6 @@ nlu:
     - thx
     - thanks for your information
     - thanks f
-
 - intent: search_transactions
   examples: |
     - how much did I spend at [Carrfours](vendor_name) this week?
@@ -222,7 +194,6 @@ nlu:
     - What did I spend at [magasin général](vendor_name) last month?
     - what did I spend at [Carrfours](vendor_name) last month
     - where did I spend the most money last month?
-
 - intent: check_earnings
   examples: |
     - How much money went into my account last month?
@@ -247,9 +218,6 @@ nlu:
     - show me how much I've earned in the last week
     - can i afford to go on vacation
     - rent is due soon how much do I have in my account
-
-
-
 - intent: mood_great
   examples: |
     - perfect
@@ -266,7 +234,6 @@ nlu:
     - so so perfect
     - so good
     - so perfect
-
 - intent: mood_unhappy
   examples: |
     - my day was horrible
@@ -283,7 +250,6 @@ nlu:
     - extremly sad
     - so saad
     - so sad
-
 - intent: out_of_scope
   examples: |
     - what is the square root of 5
@@ -310,10 +276,8 @@ nlu:
     - Can you please send me an uber
     - ofif fsdfafsfs
     - gkfmkbfdmlbkl bkmkbmdf
-    - tbalbiiiiz 
+    - tbalbiiiiz
     - stuffff
-
-
 - intent: help
   examples: |
     - help
@@ -332,14 +296,10 @@ nlu:
     - come back
     - cool! can I do something else here?
     - hello what can you do for me
-    - help
-    - help me
     - help please
     - help pls
     - help?
     - hep me
-
-
 - intent: ask_transfer_charge
   examples: |
     - Will I be charged for transferring money
@@ -364,8 +324,6 @@ nlu:
     - what is the percentage fee for transactions to another person
     - are there any transaction fees or charges I should know about?
     - tell me about transfer fees
-
-
 - intent: transfer_money
   examples: |
     - I want to pay [John](PERSON)
@@ -419,8 +377,6 @@ nlu:
     - Please transfer 50 dollars to [Andreas](PERSON)
     - I would like to transfer money to [Philipp](PERSON)
     - I would like to transfer 50$ to [Joschka](PERSON)
-
-
 - intent: check_recipients
   examples: |
     - Who can I send money to?
@@ -445,7 +401,6 @@ nlu:
     - who exactly am I able to send money to
     - if I want to transfer money can i send it to anyone
     - show me my money sending list
-
 - intent: check_balance
   examples: |
     - How much money is on my account?
@@ -502,7 +457,6 @@ nlu:
     - Wait, I'll have to check my balance first. Can you do that please?
     - Hi, I need to know how much money is in my [checking](account_type) account
     - Balance please
-
 - intent: pay_cc
   examples: |
     - I would like to pay the [minimum balance](amount-of-money) on my [embelm](credit_card) [card](account_type)
@@ -544,7 +498,6 @@ nlu:
     - i wanna pay my [credit card]{"entity": "account_type", "value": "credit"}
     - pay a bill
     - can I pay my [card]{"entity": "account_type", "value": "credit"}?
-
 - intent: add_person_to_recipients
   examples: |
     - Add new person to payee list
@@ -573,16 +526,13 @@ nlu:
     - Remember the RIB of [Rania](PERSON) which is [123456789](RIB)
     - Please remember the account details of this person
     - Remeber the account details of [Rania](PERSON)
-    - Memorise the details of this account 
+    - Memorise the details of this account
     - Save the RIB of this person
     - Don't ask me about the account details next time
     - Can you save the account details of [Naima](PERSON)
     - Add a new recipient
     - Add a new recipient with the name [SAMY](PERSON) and RIB [142536789](RIB)
     - New recipient on my list
-
-
-
 - intent: inform
   examples: |
     - $10
@@ -618,9 +568,7 @@ nlu:
     - [Target](vendor_name)
     - I want to pay the [current balance](amount-of-money)
     - [current balance](amount-of-money)
-
     - the [current balance](amount-of-money)
-
     - my [current balance](amount-of-money)
     - [Ettijeri](credit_card) [card](account_type)
     - [Zaitouna](credit_card) [card](account_type
@@ -697,17 +645,13 @@ nlu:
     - Percy
     - percy donald
     - danIelle smilanich
-
-    
-   
-    
 - synonym: credit
   examples: |
     - credit card
+    - card
     - credit cards
     - credit account
     - credit accounts
-    - card
     - cards
     - credit card account
 - synonym: emblem

@@ -54,6 +54,19 @@ create_database(ENGINE, PROFILE_DB_NAME)
 
 profile_db = ProfileDB(ENGINE)
 
+NEXT_FORM_NAME = {
+    "pay_cc": "cc_payment_form",
+    "transfer_money": "transfer_money_form",
+    "search_transactions": "transaction_search_form",
+    "check_earnings": "transaction_search_form",
+}
+
+FORM_DESCRIPTION = {
+    "cc_payment_form": "credit card payment",
+    "transfer_money_form": "money transfer",
+    "transaction_search_form": "transaction search",
+}
+
 
 #
 #class ActionHelloWorld(Action):
@@ -223,7 +236,7 @@ class ActionPayCC(Action):
              "start_time_formatted": None,
              "end_time_formatted": None,
              "grain": None,
-            #"number": None,
+            "number": None,
         }
 
         if tracker.get_slot("confirmation") == "yes":
@@ -255,7 +268,7 @@ class ActionAddRecipient(Action):
     ) -> List[EventType]:
         """Executes the action"""
         slots = {
-          
+           "AA_CONTINUE_FORM": None,
            "confirmation": None,
            "PERSON_Recipient": None,
            "RIB": None,
@@ -302,11 +315,11 @@ class ActionTransferMoney(Action):
     ) -> List[EventType]:
         """Executes the action"""
         slots = {
-          # "AA_CONTINUE_FORM": None,
+          "AA_CONTINUE_FORM": None,
            "confirmation": None,
            "PERSON_transfer": None,
            "amount-of-money": None,
-           #"number": None,
+           "number": None,
    }
 
         if tracker.get_slot("confirmation") == "yes":
@@ -799,14 +812,14 @@ class ActionShowBalance(Action):
             #     )
 
         events = []
-        # active_form_name = tracker.active_form.get("name")
-        # if active_form_name:
-        #     # keep the tracker clean for the predictions with form switch stories
-        #     events.append(UserUtteranceReverted())
-        #     # trigger utter_ask_{form}_AA_CONTINUE_FORM, by making it the requested_slot
-        #     events.append(SlotSet("AA_CONTINUE_FORM", None))
-        #     # avoid that bot goes in listen mode after UserUtteranceReverted
-        #     events.append(FollowupAction(active_form_name))
+        active_form_name = tracker.active_form.get("name")
+        if active_form_name:
+            # keep the tracker clean for the predictions with form switch stories
+            events.append(UserUtteranceReverted())
+            # trigger utter_ask_{form}_AA_CONTINUE_FORM, by making it the requested_slot
+            events.append(SlotSet("AA_CONTINUE_FORM", None))
+            # avoid that bot goes in listen mode after UserUtteranceReverted
+            events.append(FollowupAction(active_form_name))
 
         return events
 
@@ -815,126 +828,200 @@ class ActionShowBalance(Action):
 #####################################################################################
 
 
-# class ActionSwitchFormsAsk(Action):
-#     """Asks to switch forms"""
-
-#     def name(self) -> Text:
-#         return "action_switch_forms_ask"
-
-#     async def run(
-#         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
-#     ) -> List[EventType]:
-#         """Executes the custom action"""
-#         active_form_name = tracker.active_form.get("name")
-#         intent_name = tracker.latest_message["intent"]["name"]
-#         next_form_name = NEXT_FORM_NAME.get(intent_name)
-
-#         if (
-#             active_form_name not in FORM_DESCRIPTION.keys()
-#             or next_form_name not in FORM_DESCRIPTION.keys()
-#         ):
-#             logger.debug(
-#                 f"Cannot create text for `active_form_name={active_form_name}` & "
-#                 f"`next_form_name={next_form_name}`"
-#             )
-#             next_form_name = None
-#         else:
-#             text = (
-#                 f"We haven't completed the {FORM_DESCRIPTION[active_form_name]} yet. "
-#                 f"Are you sure you want to switch to {FORM_DESCRIPTION[next_form_name]}?"
-#             )
-#             buttons = [
-#                 {"payload": "/affirm", "title": "Yes"},
-#                 {"payload": "/deny", "title": "No"},
-#             ]
-#             dispatcher.utter_message(text=text, buttons=buttons)
-#         return [SlotSet("next_form_name", next_form_name)]
 
 
-# class ActionSwitchFormsDeny(Action):
-#     """Does not switch forms"""
-
-#     def name(self) -> Text:
-#         return "action_switch_forms_deny"
-
-#     async def run(
-#         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
-#     ) -> List[EventType]:
-#         """Executes the custom action"""
-#         active_form_name = tracker.active_form.get("name")
-
-#         if active_form_name not in FORM_DESCRIPTION.keys():
-#             logger.debug(
-#                 f"Cannot create text for `active_form_name={active_form_name}`."
-#             )
-#         else:
-#             text = f"Ok, let's continue with the {FORM_DESCRIPTION[active_form_name]}."
-#             dispatcher.utter_message(text=text)
-
-#         return [SlotSet("next_form_name", None)]
 
 
-# class ActionSwitchFormsAffirm(Action):
-#     """Switches forms"""
+class ActionSwitchFormsAsk(Action):
+    """Asks to switch forms"""
 
-#     def name(self) -> Text:
-#         return "action_switch_forms_affirm"
+    def name(self) -> Text:
+        return "action_switch_forms_ask"
 
-#     async def run(
-#         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
-#     ) -> List[EventType]:
-#         """Executes the custom action"""
-#         active_form_name = tracker.active_form.get("name")
-#         next_form_name = tracker.get_slot("next_form_name")
+    async def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
+    ) -> List[EventType]:
+        """Executes the custom action"""
+        active_form_name = tracker.active_form.get("name")
+        intent_name = tracker.latest_message["intent"]["name"]
+        next_form_name = NEXT_FORM_NAME.get(intent_name)
 
-#         if (
-#             active_form_name not in FORM_DESCRIPTION.keys()
-#             or next_form_name not in FORM_DESCRIPTION.keys()
-#         ):
-#             logger.debug(
-#                 f"Cannot create text for `active_form_name={active_form_name}` & "
-#                 f"`next_form_name={next_form_name}`"
-#             )
-#         else:
-#             text = (
-#                 f"Great. Let's switch from the {FORM_DESCRIPTION[active_form_name]} "
-#                 f"to {FORM_DESCRIPTION[next_form_name]}. "
-#                 f"Once completed, you will have the option to switch back."
-#             )
-#             dispatcher.utter_message(text=text)
+        if (
+            active_form_name not in FORM_DESCRIPTION.keys()
+            or next_form_name not in FORM_DESCRIPTION.keys()
+        ):
+            logger.debug(
+                f"Cannot create text for `active_form_name={active_form_name}` & "
+                f"`next_form_name={next_form_name}`"
+            )
+            next_form_name = None
+        else:
+            text = (
+                f"We haven't completed the {FORM_DESCRIPTION[active_form_name]} yet. "
+                f"Are you sure you want to switch to {FORM_DESCRIPTION[next_form_name]}?"
+            )
+            buttons = [
+                {"payload": "/affirm", "title": "Yes"},
+                {"payload": "/deny", "title": "No"},
+            ]
+            dispatcher.utter_message(text=text, buttons=buttons)
+        return [SlotSet("next_form_name", next_form_name)]
 
-#         return [
-#             SlotSet("previous_form_name", active_form_name),
-#             SlotSet("next_form_name", None),
-#         ]
+
+class ActionSwitchFormsDeny(Action):
+    """Does not switch forms"""
+
+    def name(self) -> Text:
+        return "action_switch_forms_deny"
+
+    async def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
+    ) -> List[EventType]:
+        """Executes the custom action"""
+        active_form_name = tracker.active_form.get("name")
+
+        if active_form_name not in FORM_DESCRIPTION.keys():
+            logger.debug(
+                f"Cannot create text for `active_form_name={active_form_name}`."
+            )
+        else:
+            text = f"Ok, let's continue with the {FORM_DESCRIPTION[active_form_name]}."
+            dispatcher.utter_message(text=text)
+
+        return [SlotSet("next_form_name", None)]
 
 
-# class ActionSwitchBackAsk(Action):
-#     """Asks to switch back to previous form"""
+class ActionSwitchFormsAffirm(Action):
+    """Switches forms"""
 
-#     def name(self) -> Text:
-#         return "action_switch_back_ask"
+    def name(self) -> Text:
+        return "action_switch_forms_affirm"
 
-#     async def run(
-#         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
-#     ) -> List[EventType]:
-#         """Executes the custom action"""
-#         previous_form_name = tracker.get_slot("previous_form_name")
+    async def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
+    ) -> List[EventType]:
+        """Executes the custom action"""
+        active_form_name = tracker.active_form.get("name")
+        next_form_name = tracker.get_slot("next_form_name")
 
-#         if previous_form_name not in FORM_DESCRIPTION.keys():
-#             logger.debug(
-#                 f"Cannot create text for `previous_form_name={previous_form_name}`"
-#             )
-#             previous_form_name = None
-#         else:
-#             text = (
-#                 f"Would you like to go back to the "
-#                 f"{FORM_DESCRIPTION[previous_form_name]} now?."
-#             )
-#             buttons = [
-#                 {"payload": "/affirm", "title": "Yes"},
-#                 {"payload": "/deny", "title": "No"},
-#             ]
-#             dispatcher.utter_message(text=text, buttons=buttons)
+        if (
+            active_form_name not in FORM_DESCRIPTION.keys()
+            or next_form_name not in FORM_DESCRIPTION.keys()
+        ):
+            logger.debug(
+                f"Cannot create text for `active_form_name={active_form_name}` & "
+                f"`next_form_name={next_form_name}`"
+            )
+        else:
+            text = (
+                f"Great. Let's switch from the {FORM_DESCRIPTION[active_form_name]} "
+                f"to {FORM_DESCRIPTION[next_form_name]}. "
+                f"Once completed, you will have the option to switch back."
+            )
+            dispatcher.utter_message(text=text)
 
-#         return [SlotSet("previous_form_name", None)]
+        return [
+            SlotSet("previous_form_name", active_form_name),
+            SlotSet("next_form_name", None),
+        ]
+
+
+class ActionSwitchBackAsk(Action):
+    """Asks to switch back to previous form"""
+
+    def name(self) -> Text:
+        return "action_switch_back_ask"
+
+    async def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
+    ) -> List[EventType]:
+        """Executes the custom action"""
+        previous_form_name = tracker.get_slot("previous_form_name")
+
+        if previous_form_name not in FORM_DESCRIPTION.keys():
+            logger.debug(
+                f"Cannot create text for `previous_form_name={previous_form_name}`"
+            )
+            previous_form_name = None
+        else:
+            text = (
+                f"Would you like to go back to the "
+                f"{FORM_DESCRIPTION[previous_form_name]} now?."
+            )
+            buttons = [
+                {"payload": "/affirm", "title": "Yes"},
+                {"payload": "/deny", "title": "No"},
+            ]
+            dispatcher.utter_message(text=text, buttons=buttons)
+
+        return [SlotSet("previous_form_name", None)]
+
+
+
+
+
+class ActionSessionStart(Action):
+    """Executes at start of session"""
+
+    def name(self) -> Text:
+        """Unique identifier of the action"""
+        return "action_session_start"
+
+    @staticmethod
+    def _slot_set_events_from_tracker(
+        tracker: "Tracker",
+    ) -> List["SlotSet"]:
+        """Fetches SlotSet events from tracker and carries over keys and values"""
+
+        # when restarting most slots should be reset
+        relevant_slots = ["currency"]
+
+        return [
+            SlotSet(
+                key=event.get("name"),
+                value=event.get("value"),
+            )
+            for event in tracker.events
+            if event.get("event") == "slot" and event.get("name") in relevant_slots
+        ]
+
+    async def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[EventType]:
+        """Executes the custom action"""
+        # the session should begin with a `session_started` event
+        events = [SessionStarted()]
+
+        events.extend(self._slot_set_events_from_tracker(tracker))
+
+        # create a mock profile by populating database with values specific to tracker.sender_id
+        profile_db.populate_profile_db(tracker.sender_id)
+        currency = profile_db.get_currency(tracker.sender_id)
+
+        # initialize slots from mock profile
+        events.append(SlotSet("currency", currency))
+
+        # add `action_listen` at the end
+        events.append(ActionExecuted("action_listen"))
+
+        return events
+
+
+class ActionRestart(Action):
+    """Executes after restart of a session"""
+
+    def name(self) -> Text:
+        """Unique identifier of the action"""
+        return "action_restart"
+
+    async def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[EventType]:
+        """Executes the custom action"""
+        return [Restarted(), FollowupAction("action_session_start")]
